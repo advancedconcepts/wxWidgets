@@ -465,6 +465,9 @@ bool MyApp::OnInit()
     MyFrame *frame = new MyFrame("Drawing sample",
                                  wxDefaultPosition, wxSize(550, 840));
 
+#if defined(__WXOSX__) && wxOSX_USE_IPHONE
+    frame->Maximize();
+#endif
     // Show it
     frame->Show(true);
 
@@ -2013,6 +2016,8 @@ void MyCanvas::OnMouseUp(wxMouseEvent &event)
 void MyCanvas::UseGraphicRenderer(wxGraphicsRenderer* renderer)
 {
     m_renderer = renderer;
+
+#if wxUSE_STATUSBAR
     if (renderer)
     {
         int major, minor, micro;
@@ -2025,6 +2030,7 @@ void MyCanvas::UseGraphicRenderer(wxGraphicsRenderer* renderer)
     {
         m_owner->SetStatusText(wxEmptyString, 1);
     }
+#endif
 
     Refresh();
 }
@@ -2082,6 +2088,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     // set the frame icon
     SetIcon(wxICON(sample));
 
+#if wxUSE_MENUS
     wxMenu *menuScreen = new wxMenu;
     menuScreen->Append(File_ShowDefault, "&Default screen\tF1");
     menuScreen->Append(File_ShowText, "&Text screen\tF2");
@@ -2183,6 +2190,30 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
     // ... and attach this menu bar to the frame
     SetMenuBar(menuBar);
+#elif wxUSE_TOOLBAR
+    wxToolBar* tb = CreateToolBar();
+    tb->AddTool(File_ShowDefault, "Deflt", wxNullBitmap);
+    tb->AddTool(File_ShowText, "Text", wxNullBitmap);
+    tb->AddTool(File_ShowLines, "Lines", wxNullBitmap);
+    tb->AddTool(File_ShowBrushes, "Brush", wxNullBitmap);
+    tb->AddTool(File_ShowPolygons, "Poly", wxNullBitmap);
+    tb->AddTool(File_ShowMask, "Mask", wxNullBitmap);
+    tb->AddTool(File_ShowMaskStretch, "MsStr", wxNullBitmap);
+    tb->AddTool(File_ShowOps, "Rastr", wxNullBitmap);
+    tb->AddTool(File_ShowRegions, "Regns", wxNullBitmap);
+    tb->AddTool(File_ShowCircles, "Circl", wxNullBitmap);
+
+#if wxDRAWING_DC_SUPPORTS_ALPHA || wxUSE_GRAPHICS_CONTEXT
+    tb->AddTool(File_ShowAlpha, "Alpha", wxNullBitmap);
+#endif // wxDRAWING_DC_SUPPORTS_ALPHA || wxUSE_GRAPHICS_CONTEXT
+    tb->AddTool(File_ShowSplines, "Splin", wxNullBitmap);
+    tb->AddTool(File_ShowGradients, "Grads", wxNullBitmap);
+#if wxUSE_GRAPHICS_CONTEXT
+    tb->AddTool(File_ShowGraphics, "Grafx", wxNullBitmap);
+#endif
+    tb->AddTool(File_ShowSystemColours, "Colrs", wxNullBitmap);
+    tb->Realize();
+#endif // wxUSE_TOOLBAR
 
 #if wxUSE_STATUSBAR
     CreateStatusBar(2);
@@ -2263,7 +2294,8 @@ void MyFrame::OnSave(wxCommandEvent& WXUNUSED(event))
     wildCard.Append(wxS("|PostScript file (*.ps)|*.ps;*.PS"));
 #endif
 
-    wxFileDialog dlg(this, "Save as bitmap", wxEmptyString, wxEmptyString,
+#if wxUSE_FILEDLG
+    wxFileDialog dlg(this, wxT("Save as bitmap"), wxEmptyString, wxEmptyString,
                      wildCard,
                      wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
     if (dlg.ShowModal() == wxID_OK)
@@ -2346,6 +2378,7 @@ void MyFrame::OnSave(wxCommandEvent& WXUNUSED(event))
             bmp.ConvertToImage().SaveFile(dlg.GetPath());
         }
     }
+#endif // wxUSE_FILEDLG
 }
 
 void MyFrame::OnShow(wxCommandEvent& event)
@@ -2368,11 +2401,15 @@ void MyFrame::OnShow(wxCommandEvent& event)
         if ( !m_canvas->HasRenderer() )
             m_canvas->UseGraphicRenderer(wxGraphicsRenderer::GetDefaultRenderer());
         // Disable selecting wxDC, if necessary.
+#if wxUSE_MENUS
         m_menuItemUseDC->Enable(!m_canvas->HasRenderer());
+#endif
     }
     else
     {
+#if wxUSE_MENUS
         m_menuItemUseDC->Enable(true);
+#endif
     }
 #endif // wxDRAWING_DC_SUPPORTS_ALPHA || wxUSE_GRAPHICS_CONTEXT
     m_canvas->ToShow(show);
