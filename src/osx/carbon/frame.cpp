@@ -68,6 +68,11 @@ wxPoint wxFrame::GetClientAreaOrigin() const
         }
         else if ( toolbar->HasFlag(wxTB_TOP) )
         {
+#if wxOSX_USE_IPHONE
+            // the translucent status bar extends to the top, but the toolbar
+            // frame only starts at 20 points
+            pt.y += 20;
+#endif
 #if !wxOSX_USE_NATIVE_TOOLBAR
             pt.y += h;
 #endif
@@ -239,6 +244,11 @@ void wxFrame::DoGetClientSize(int *x, int *y) const
         }
         else
         {
+#if wxOSX_USE_IPHONE
+            // the translucent status bar extends to the top, but the toolbar
+            // frame only starts at 20 points
+           *y -= 20;
+#endif
 #if !wxOSX_USE_NATIVE_TOOLBAR
             if ( y )
                 *y -= h;
@@ -367,6 +377,9 @@ void wxFrame::PositionToolBar()
         {
 #if !wxOSX_USE_NATIVE_TOOLBAR
             // Use the 'real' position
+#if wxOSX_USE_IPHONE
+            ty = 20;
+#endif
             GetToolBar()->SetSize(tx , ty , cw , th, wxSIZE_NO_ADJUSTMENTS );
 #endif
         }
