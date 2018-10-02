@@ -230,6 +230,8 @@
 		3ED6F4B64C283232A79423CF /* dircmn.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EC9B6DFBF2F73917A99361C5 /* dircmn.cpp */; };
 		403FBA20CEFE3EAFB4E6B905 /* dir.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F7332A03D93D3DABB050615D /* dir.cpp */; };
 		4040AE89BF9F34668091064A /* dragimgg.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A67053D16D63C588E555C84 /* dragimgg.cpp */; };
+		4087B9192163B990000618B5 /* arm_init.c in Sources */ = {isa = PBXBuildFile; fileRef = 4087B9172163B98F000618B5 /* arm_init.c */; };
+		4087B91A2163B990000618B5 /* filter_neon_intrinsics.c in Sources */ = {isa = PBXBuildFile; fileRef = 4087B9182163B98F000618B5 /* filter_neon_intrinsics.c */; };
 		41943A8F82723027A151A468 /* fileconf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61DA2A4C0D143CBE804BB8A1 /* fileconf.cpp */; };
 		42260A6F1853361083803B0C /* zutil.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB467F9898C3952A68D988B /* zutil.c */; };
 		4269B85FDC5639BEB76A8AEB /* nonownedwnd_osx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19559DDA007D364E838014B5 /* nonownedwnd_osx.cpp */; };
@@ -1066,6 +1068,8 @@
 		4048A3523EC03409BD899BEF /* xtixml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = xtixml.cpp; path = ../../src/common/xtixml.cpp; sourceTree = "<group>"; };
 		40586C8986443431A64EB066 /* LexLisp.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = LexLisp.cxx; path = ../../src/stc/scintilla/lexers/LexLisp.cxx; sourceTree = "<group>"; };
 		4071FF90F1D4336C836B2AE4 /* tif_pixarlog.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = tif_pixarlog.c; path = ../../src/tiff/libtiff/tif_pixarlog.c; sourceTree = "<group>"; };
+		4087B9172163B98F000618B5 /* arm_init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = arm_init.c; path = ../../src/png/arm/arm_init.c; sourceTree = "<group>"; };
+		4087B9182163B98F000618B5 /* filter_neon_intrinsics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = filter_neon_intrinsics.c; path = ../../src/png/arm/filter_neon_intrinsics.c; sourceTree = "<group>"; };
 		40CE02524DD4385AB2C3DF95 /* socket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = socket.cpp; path = ../../src/common/socket.cpp; sourceTree = "<group>"; };
 		4188821BBA833CCAA678B234 /* utilscmn.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = utilscmn.cpp; path = ../../src/common/utilscmn.cpp; sourceTree = "<group>"; };
 		418AD9241B673308BE31DC06 /* xlocale.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = xlocale.cpp; path = ../../src/common/xlocale.cpp; sourceTree = "<group>"; };
@@ -2469,6 +2473,8 @@
 		6E2C8858F68E3FB0BEFFFCE5 /* libpng */ = {
 			isa = PBXGroup;
 			children = (
+				4087B9172163B98F000618B5 /* arm_init.c */,
+				4087B9182163B98F000618B5 /* filter_neon_intrinsics.c */,
 				AF26BAB1F4733114926F1724 /* png.c */,
 				1A0650754DC2358CA5933B28 /* pngerror.c */,
 				91300EB871CC39ECBC430D48 /* pngget.c */,
@@ -2836,7 +2842,7 @@
 			isa = PBXProject;
 			attributes = {
 			};
-			buildConfigurationList = A66311F47C8832F6A58105B6 /* Build configuration list for PBXProject "wxiPhone" */;
+			buildConfigurationList = A66311F47C8832F6A58105B6 /* Build configuration list for PBXProject "wxiphone" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -3576,6 +3582,7 @@
 				61A2B54FD2E33C759CF5A5E8 /* pngrutil.c in Sources */,
 				309C0A78D45C3AB7B8778B59 /* pngset.c in Sources */,
 				E515EAE375AE390688CBF8D3 /* pngtrans.c in Sources */,
+				4087B91A2163B990000618B5 /* filter_neon_intrinsics.c in Sources */,
 				C8C68927DB243AEAB51E11F2 /* pngwio.c in Sources */,
 				0095084719983B878378CA28 /* pngwrite.c in Sources */,
 				242E1D1A9BF331BA918134EC /* pngwtran.c in Sources */,
@@ -3674,6 +3681,7 @@
 				D5C5DD83882B3227A1CCFE0E /* LexSorcus.cxx in Sources */,
 				6F8129E317EE3486A89D8548 /* LexSpecman.cxx in Sources */,
 				9678C2B19D293818AA8E9E0D /* LexSpice.cxx in Sources */,
+				4087B9192163B990000618B5 /* arm_init.c in Sources */,
 				71CCB06E790C3C54BFF1199D /* LexSQL.cxx in Sources */,
 				E46BEC5C8D643BD099AF1D56 /* LexSTTXT.cxx in Sources */,
 				0F8C79010EF0316AA1B7392D /* LexTACL.cxx in Sources */,
@@ -3787,7 +3795,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A66311F47C8832F6A58105B6 /* Build configuration list for PBXProject "wxiPhone" */ = {
+		A66311F47C8832F6A58105B6 /* Build configuration list for PBXProject "wxiphone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55C93151F6053EBCBDD70DF9 /* Debug */,
